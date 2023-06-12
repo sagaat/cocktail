@@ -45,7 +45,7 @@ const ListeCocktail = () => {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#FFDAB9',
+      backgroundColor: '#FEC8D8',
       padding: 10,
     },
     cocktailContainer: {
@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#F2F2F2',
       borderRadius: 10,
       padding: 10,
+      shadowColor: "#000",
+      shadowOpacity: 0.25,
+      shadowOffset: {
+        width: 1,
+        height: 1,
+      },
     },
     cocktailImage: {
       width: 150,
