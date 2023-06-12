@@ -5,8 +5,7 @@ import ListeCocktail from '../../components/cocktailList';
 export default function HomeScreen({ navigation }) {
     return (
         <View>
-            <ListeCocktail 
-            />
+            <ListeCocktail navigation={navigation}/>
         </View>
     );
 }

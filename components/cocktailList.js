@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 
-const ListeCocktail = () => {
-    const [cocktails, setCocktails] = useState(['']);
+const ListeCocktail = ({ navigation }) => {
+  const [cocktails, setCocktails] = useState(['']);
 
   useEffect(() => {
     const fetchCocktails = async () => {
@@ -20,8 +20,12 @@ const ListeCocktail = () => {
     fetchCocktails();
   }, []);
 
+  const goToDetailsScreen = (itemId) => {
+    navigation.navigate('Details', { itemId: itemId });
+  };
+
   const renderCocktail = ({ item }) => (
-    <TouchableOpacity key={item.idDrink} style={styles.cocktailContainer} >
+    <TouchableOpacity key={item.idDrink} style={styles.cocktailContainer} onPress={() => goToDetailsScreen(item.idDrink)}>
       <Image
         source={{ uri: item.strDrinkThumb }}
         style={styles.cocktailImage}
@@ -44,35 +48,35 @@ const ListeCocktail = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor: '#FEC8D8',
-      padding: 10,
+  container: {
+    backgroundColor: '#FEC8D8',
+    padding: 10,
+  },
+  cocktailContainer: {
+    flex: 1,
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F2F2F2',
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      width: 1,
+      height: 1,
     },
-    cocktailContainer: {
-      flex: 1,
-      margin: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#F2F2F2',
-      borderRadius: 10,
-      padding: 10,
-      shadowColor: "#000",
-      shadowOpacity: 0.25,
-      shadowOffset: {
-        width: 1,
-        height: 1,
-      },
-    },
-    cocktailImage: {
-      width: 150,
-      height: 150,
-      borderRadius: 10,
-    },
-    cocktailName: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
+  },
+  cocktailImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 10,
+  },
+  cocktailName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
 
 export default ListeCocktail;
