@@ -6,26 +6,34 @@ const ListeCocktail = ({ navigation }) => {
 
   useEffect(() => {
     const fetchCocktails = async () => {
-        try {
-            const response = await fetch(
-            'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
-            );
-            const data = await response.json();
-            setCocktails(data.drinks);
-        } catch (error) {
-            console.log(error);
-        }
+      try {
+        const response = await fetch(
+          'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'
+        );
+        const data = await response.json();
+        setCocktails(data.drinks);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchCocktails();
   }, []);
 
-  const goToDetailsScreen = (itemId) => {
-    navigation.navigate('Details', { itemId: itemId });
+  const goToDetailsScreen = async (item) => {
+    try {
+      const response = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${item.idDrink}`
+      );
+      const data = await response.json();
+      navigation.navigate('Details', { item: data.drinks[0] });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderCocktail = ({ item }) => (
-    <TouchableOpacity key={item.idDrink} style={styles.cocktailContainer} onPress={() => goToDetailsScreen(item.idDrink)}>
+    <TouchableOpacity key={item.idDrink} style={styles.cocktailContainer} onPress={() => goToDetailsScreen(item)}>
       <Image
         source={{ uri: item.strDrinkThumb }}
         style={styles.cocktailImage}
@@ -33,7 +41,7 @@ const ListeCocktail = ({ navigation }) => {
       <Text style={styles.cocktailName}>{item.strDrink}</Text>
     </TouchableOpacity>
   );
-  
+
   return (
     <View>
       <FlatList

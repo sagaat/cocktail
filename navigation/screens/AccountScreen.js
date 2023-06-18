@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, } from 'react-native';
 
 const img = 'https://www.asiamediajournal.com/wp-content/uploads/2022/11/One-Piece-Roronoa-Zoro-PFP.jpg';
 
 export default function AccountScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Image source={{uri: img}} style={styles.profilPicture}/>
+            <Image source={{ uri: img }} style={styles.profilPicture} />
             <Text style={styles.name}>Roronoa Zoro</Text>
             <Text style={styles.age}>21 ans</Text>
             <Text style={styles.titre} >Boisson préférée :</Text>
-            <Text style={styles.preferred}>Bière</Text>
+            <Text style={styles.preferred}>Frappé</Text>
         </View>
-    ); 
+    );
 }
 
 const styles = StyleSheet.create({
