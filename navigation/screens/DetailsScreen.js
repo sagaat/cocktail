@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, } from 'react-native';
+import { SafeAreaView, Text, Image, StyleSheet, ScrollView, } from 'react-native';
 
 export default function DetailsScreen({ route }) {
     const { item } = route.params;
@@ -19,7 +19,7 @@ export default function DetailsScreen({ route }) {
     }
 
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
             <Image
                 source={{ uri: item.strDrinkThumb }}
                 style={styles.cocktailImage}
@@ -32,11 +32,15 @@ export default function DetailsScreen({ route }) {
                 <Text style={styles.text}>Ingrédients : </Text>
                 {listIngredients}
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#FEC8D8',
+        flex: 1,
+    },
     cocktailImage: {
         width: '100%',
         height: '50%',
@@ -50,7 +54,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     list: {
-        backgroundColor: '#FEC8D8',
         paddingBottom: 15,
         height: '43.5%',
     },
